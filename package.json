@@ -1,0 +1,20 @@
+{
+    "name": "react-native-skeletons-reanimated",
+    "version": "1.0.0",
+    "description": "Lib for creating skeletons loader on reanimated 2",
+    "main": "src/index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "Ivan Puisans",
+    "license": "MIT",
+    "dependencies": {
+        "react-native-reanimated": "^2.3.1",
+        "react-native-linear-gradient": "2.5.6"
+    },
+    "devDependencies": {
+        "react": "17.0.2",
+        "react-native": "0.66.3"
+    }
+}
