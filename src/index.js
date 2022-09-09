@@ -10,7 +10,6 @@ import Animated, {
     withSequence,
     withTiming,
 } from 'react-native-reanimated';
-import colors from './colors';
 
 const screenWidth = Dimensions.get('screen').width;
 const loaderWidth = screenWidth - 40;
@@ -109,7 +108,7 @@ export default SkeletonLoader;
 
 const styles = StyleSheet.create({
     loaderRow: {
-        backgroundColor: colors.lightGrey,
+        backgroundColor: '#F3F3F4',
         flexGrow: 1,
     },
     animationContainer: {
