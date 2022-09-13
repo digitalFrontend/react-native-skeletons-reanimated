@@ -68,13 +68,13 @@ const SkeletonLoader = (props) => {
             style={[
                 styles.loaderRow,
                 {
-                    height: height,
-                    width: width,
+                    height: height || 0,
+                    width: width || 0,
                     borderRadius: r,
                     overflow: 'hidden',
                     position: 'absolute',
-                    top: y,
-                    left: x,
+                    top: y || 0,
+                    left: x || 0,
                 },
             ]}
         >
