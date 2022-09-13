@@ -54,8 +54,8 @@ const SkeletonLoader = (props) => {
         };
     });
 
-    height = Number(r) ? Number(r) * 2 : Number(height);
-    width = Number(r) ? Number(r) * 2 : Number(width);
+    height = Number(r) && !Number(height) ? Number(r) * 2 : Number(height);
+    width = Number(r) && !Number(width) ? Number(r) * 2 : Number(width);
     r = Number(r) ? Number(r) : 0;
     y = Number(y);
     x = Number(x);
@@ -112,7 +112,6 @@ const styles = StyleSheet.create({
         flexGrow: 1,
     },
     animationContainer: {
-        backgroundColor: 'black',
         borderRadius: 4,
         overflow: 'hidden',
         flex: 1,
