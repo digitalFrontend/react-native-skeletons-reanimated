@@ -1,52 +1,40 @@
 import React, { useEffect } from 'react';
-import { Dimensions, StyleSheet, View } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import { View, Dimensions, StyleSheet } from 'react-native';
 import Animated, {
-    Easing,
     useAnimatedStyle,
-    useSharedValue,
     withDelay,
-    withRepeat,
     withSequence,
     withTiming,
+    useSharedValue,
+    Easing,
+    withRepeat,
 } from 'react-native-reanimated';
+import LinearGradient from 'react-native-linear-gradient';
+import MaskedView from '@react-native-masked-view/masked-view';
 
 const screenWidth = Dimensions.get('screen').width;
-const loaderWidth = screenWidth - 40;
 
-const SkeletonLoader = (props) => {
-    let { height, width, r, x, y } = props;
-
-    const animatedWave = useSharedValue(-loaderWidth);
+const SkeletonLoader2 = (props) => {
+    const animatedWave = useSharedValue(-screenWidth);
 
     useEffect(() => {
         animatedWave.value = withRepeat(
-            //последовательный запуск анимации
             withDelay(
                 700,
                 withSequence(
-                    //длительность и значение анимации
-                    withTiming(0, {
+                    withTiming(screenWidth, {
                         duration: 1000,
                         easing: Easing.linear,
                     }),
-                    //длительность и значение анимации
-                    withTiming(0, {
+                    withTiming(screenWidth, {
                         duration: 1,
                     })
                 )
             ),
             -1,
             false
-        ); //количество повторений и будет ли осуществен вызов колебека
+        );
     }, []);
-
-    const animatedStyles = useAnimatedStyle(() => {
-        // console.log('animatedWave.value', animatedWave.value)
-        return {
-            opacity: animatedWave.value + loaderWidth,
-        };
-    });
 
     const animatedWaveStyles = useAnimatedStyle(() => {
         return {
@@ -54,79 +42,58 @@ const SkeletonLoader = (props) => {
         };
     });
 
-    height = Number(r) && !Number(height) ? Number(r) * 2 : Number(height);
-    width = Number(r) && !Number(width) ? Number(r) * 2 : Number(width);
-    r = Number(r) ? Number(r) : 0;
-    y = Number(y);
-    x = Number(x);
+    const cloneDeepComponent = (Component) => {
+        if (Component.props?.children instanceof Array) {
+            return (
+                <View
+                    style={Component.props.style}
+                    shitProp={Component.props.shitProp}
+                >
+                    {Component.props.children.map((subComponent) => {
+                        if (subComponent.props.children) {
+                            return cloneDeepComponent(subComponent);
+                        } else {
+                            subComponent.props.style.backgroundColor = 'red';
+                            return subComponent;
+                        }
+                    })}
+                </View>
+            );
+        }
+    };
 
-    const loaderSidesColor = '#F3F3F4';
-    const loaderCenterColor = '#fafafa';
+    const newChildren = cloneDeepComponent(props.children);
 
     return (
-        <View
-            style={[
-                styles.loaderRow,
-                {
-                    height: height || 0,
-                    width: width || 0,
-                    borderRadius: r,
-                    overflow: 'hidden',
-                    position: 'absolute',
-                    top: y || 0,
-                    left: x || 0,
-                },
-            ]}
-        >
-            <Animated.View style={[styles.animationContainer, animatedStyles]}>
-                <Animated.View
-                    style={[styles.animatedWave, animatedWaveStyles]}
-                >
+        <MaskedView style={styles.maskContainer} maskElement={newChildren}>
+            <View style={styles.container}>
+                <Animated.View style={[styles.flex1, animatedWaveStyles]}>
                     <LinearGradient
-                        start={{ x: 1, y: 0 }}
-                        end={{ x: 0.0, y: 0 }}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 0 }}
                         locations={[0, 0.4, 0.5, 0.6, 1]}
                         colors={[
-                            loaderSidesColor,
-                            loaderSidesColor,
-                            loaderCenterColor,
-                            loaderSidesColor,
-                            loaderSidesColor,
+                            'rgba(255, 255, 255, 0)',
+                            'rgba(255, 255, 255, 0)',
+                            'rgba(255, 255, 255, 1)',
+                            'rgba(255, 255, 255, 0)',
+                            'rgba(255, 255, 255, 0)',
                         ]}
-                        style={styles.gradientStyle}
                         useAngle={true}
-                        angle={-45}
+                        angle={-85}
                         angleCenter={{ x: 0.5, y: 0.5 }}
+                        style={styles.gradientStyle}
                     />
                 </Animated.View>
-            </Animated.View>
-        </View>
+            </View>
+        </MaskedView>
     );
 };
-
-export default SkeletonLoader;
+export default SkeletonLoader2;
 
 const styles = StyleSheet.create({
-    loaderRow: {
-        backgroundColor: '#F3F3F4',
-        flexGrow: 1,
-    },
-    animationContainer: {
-        borderRadius: 4,
-        overflow: 'hidden',
-        flex: 1,
-    },
-    animatedWave: {
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        width: loaderWidth * 2,
-    },
-    gradientStyle: {
-        width: loaderWidth * 2,
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        left: 0,
-    },
+    maskContainer: { flexGrow: 1 },
+    container: { flex: 1, backgroundColor: '#F3F3F4' },
+    flex1: { flex: 1 },
+    gradientStyle: { flex: 1, width: screenWidth },
 });
