@@ -59,6 +59,8 @@ const SkeletonLoader2 = (props) => {
                     })}
                 </View>
             );
+        } else {
+            return Component;
         }
     };
 
