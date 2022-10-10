@@ -1,6 +1,6 @@
 {
     "name": "react-native-skeletons-reanimated",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "description": "Lib for creating skeletons loader on reanimated 2",
     "main": "src/index.js",
     "scripts": {

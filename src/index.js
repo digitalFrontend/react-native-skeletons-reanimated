@@ -23,7 +23,7 @@ const SkeletonLoader2 = (props) => {
                 700,
                 withSequence(
                     withTiming(screenWidth, {
-                        duration: 1000,
+                        duration: props.duration ? props.duration : 1000,
                         easing: Easing.linear,
                     }),
                     withTiming(screenWidth, {
