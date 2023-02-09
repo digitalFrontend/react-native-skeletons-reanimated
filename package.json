@@ -1,27 +1,27 @@
 {
-    "name": "react-native-skeletons-reanimated",
-    "version": "2.0.2",
-    "description": "Lib for creating skeletons loader on reanimated 2",
-    "main": "src/index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/digitalFrontend/react-native-skeletons-reanimated.git",
-        "baseUrl": "https://github.com/digitalFrontend/react-native-skeletons-reanimated"
-    },
-    "keywords": [
-        "react-native"
-    ],
-    "author": "Ivan Puisans",
-    "license": "MIT",
-    "dependencies": {
-        "react-native-reanimated": "^2.3.1",
-        "react-native-linear-gradient": "2.5.6"
-    },
-    "devDependencies": {
-        "react": "17.0.2",
-        "react-native": "0.66.3"
-    }
+  "name": "react-native-skeletons-reanimated",
+  "version": "2.1.0",
+  "description": "Lib for creating skeletons loader on reanimated 2",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/digitalFrontend/react-native-skeletons-reanimated.git",
+    "baseUrl": "https://github.com/digitalFrontend/react-native-skeletons-reanimated"
+  },
+  "keywords": [
+    "react-native"
+  ],
+  "author": "Ivan Puisans",
+  "license": "MIT",
+  "dependencies": {
+    "react-native-reanimated": "^3.0.0-rc.10",
+    "react-native-linear-gradient": "2.5.6"
+  },
+  "devDependencies": {
+    "react": "17.0.2",
+    "react-native": "0.66.3"
+  }
 }
